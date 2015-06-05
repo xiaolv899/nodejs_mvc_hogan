@@ -6,6 +6,6 @@ body {
 a {
   color: #00B7FF;
 }
-.login{}
+.login{border-left:solid 5px #00B7FF;padding:5px 0 5px 20px;}
 .login input{border: 1px solid #ccc; border-radius: 3px;line-height:20px;padding:3px;}
 .login .btn input{padding:3px 8px;}

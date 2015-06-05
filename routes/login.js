@@ -6,7 +6,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
-    res.render('login', { title: "Express", name: req.body.name });
+    if(req.body.name.trim()=="")
+    {
+        res.send("ERROR：请输入用户名。");
+    }else {
+        res.render('login', {title: "Express", name: req.body.name});
+    }
 });
 
 module.exports = router;
