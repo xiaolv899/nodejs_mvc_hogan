@@ -1,0 +1,11 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.login{}
+.login input{border: 1px solid #ccc; border-radius: 3px;line-height:20px;padding:3px;}
+.login .btn input{padding:3px 8px;}
