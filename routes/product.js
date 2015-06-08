@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/list', function(req, res, next) {
     var postdata = {pageIndex:parseInt(req.query.page)||1,pageSize:10};
     api("Product/ProductGetList",postdata, function(status, json){
-        console.log(json);
+        console.log(json.runSpanTime);
         var $hour = new Date().getHours();
         var $prevpage = postdata.pageIndex- 1,$nextpage=postdata.pageIndex+1;
         if($prevpage<1)$prevpage=1;

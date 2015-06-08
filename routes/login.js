@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var postdata = {userName:req.body.name.trim(),passWord:md5(req.body.password)};
     if(postdata.userName==""||req.body.password==""){
-        res.render('login', {title: "Express", errmsg: "用户名或密码不能为空。"});
+        res.render('login', {title: "Express", required:true });
     }else {
         api("user/login", postdata, function (status, json) {
             if (json.isSuccess) {

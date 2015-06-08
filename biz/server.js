@@ -5,6 +5,7 @@ var request = require('request');
 
 exports = module.exports = function(method, postdata, callback) {
     postdata = postdata || {};
+    //参数加密处理
     postdata.apiVersion = "1.0.0.0";
     postdata.appKey = "ycfgw82oiqldadrpqi84p1zda";
     postdata.timeStamp = "2015-05-27 16:11:45";
@@ -12,14 +13,16 @@ exports = module.exports = function(method, postdata, callback) {
     postdata.channel = 4;
     postdata.version = "1.0.0.0";
 
+    var $start = new Date();
     request.post(
         {
             url:'http://api.1caifu.com/api/'+method,
             //url:'http://192.168.2.199:9000/api/'+method,
             json:postdata,
-            /*headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },*/
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'User-Agent':'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)'
+            },
             encoding:'utf8'
         },
         function(error, response, body){
@@ -30,7 +33,8 @@ exports = module.exports = function(method, postdata, callback) {
                 console.log(response.statusCode);
                 $return = "";
             }*/
-            console.log(body);
+            //console.log(body);
+            console.log("API /"+method+" "+(new Date().getTime()-$start.getTime())+"ms");
             callback(response.statusCode, body);
         }
     );
