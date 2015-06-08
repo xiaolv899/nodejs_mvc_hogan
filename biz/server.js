@@ -30,6 +30,7 @@ exports = module.exports = function(method, postdata, callback) {
                 console.log(response.statusCode);
                 $return = "";
             }*/
+            console.log(body);
             callback(response.statusCode, body);
         }
     );

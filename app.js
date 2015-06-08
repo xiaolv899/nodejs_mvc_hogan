@@ -27,8 +27,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/product', function(req,res,next){
-  if(req.cookies.username!="admin"){
-    res.redirect("/");
+  if((req.cookies.username||"")==""){
+    res.redirect("/?action=timeout");
   }else {
     next();
   }

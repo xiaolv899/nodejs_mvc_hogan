@@ -7,6 +7,6 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
-    <p><b>{{ errmsg }}</b></p>
+    <p><b>{{ errmsg }}</b> <a href="/">重新登录</a></p>
   </body>
 </html>

@@ -2,6 +2,8 @@
  * Created by Administrator on 2015/6/5.
  */
 var express = require('express');
+var api = require('../biz/server');
+var md5 = require('../biz/md5');
 var router = express.Router();
 
 /* GET home page. */
@@ -15,14 +17,20 @@ router.get('/', function(req, res, next) {
     }
 });
 router.post('/', function(req, res, next) {
-    if(req.body.name.trim()=="admin" && req.body.password == "admin")
-    {
-        //记录cookie
-        res.cookie('username', req.body.name.trim(), { maxAge: 600000 });
-        //res.send($cookie);
-        res.redirect('/product/list');
+    var postdata = {userName:req.body.name.trim(),passWord:md5(req.body.password)};
+    if(postdata.userName==""||req.body.password==""){
+        res.render('login', {title: "Express", errmsg: "用户名或密码不能为空。"});
     }else {
-        res.render('login', {title: "Express", errmsg: "用户名或密码错误"});
+        api("user/login", postdata, function (status, json) {
+            if (json.isSuccess) {
+                //记录cookie
+                res.cookie('username', postdata.userName, {maxAge: 600000});
+                res.redirect('/product/list');
+                //res.send("login in"+req.cookies.username);
+            } else {
+                res.render('login', {title: "Express", errmsg: json.errMsg});
+            }
+        });
     }
 });
 
