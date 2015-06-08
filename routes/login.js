@@ -5,12 +5,24 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
-    if(req.body.name.trim()=="")
-    {
-        res.send("ERROR：请输入用户名。");
+router.get('/', function(req, res, next) {
+    if(req.query.action == "logout"){
+        //清除cookie
+        res.clearCookie('username');
+        res.redirect("/");
     }else {
-        res.render('login', {title: "Express", name: req.body.name});
+        next();
+    }
+});
+router.post('/', function(req, res, next) {
+    if(req.body.name.trim()=="admin" && req.body.password == "admin")
+    {
+        //记录cookie
+        res.cookie('username', req.body.name.trim(), { maxAge: 600000 });
+        //res.send($cookie);
+        res.redirect('/product/list');
+    }else {
+        res.render('login', {title: "Express", errmsg: "用户名或密码错误"});
     }
 });
 

@@ -4,10 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
+var product = require('./routes/product');
 
 var app = express();
 
@@ -26,6 +26,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
+app.use('/product', function(req,res,next){
+  if(req.cookies.username!="admin"){
+    res.redirect("/");
+  }else {
+    next();
+  }
+});
+app.use('/product', product);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

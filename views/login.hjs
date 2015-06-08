@@ -7,6 +7,6 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
-    <p>Hello, <b>{{ name }}</b></p>
+    <p><b>{{ errmsg }}</b></p>
   </body>
 </html>
