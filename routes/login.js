@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
             } else {
                 res.render('login', {title: "Express", errmsg: json.errMsg});
             }
-        });
+        },next);
     }
 });
 

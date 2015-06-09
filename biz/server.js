@@ -3,7 +3,7 @@
  */
 var request = require('request');
 
-exports = module.exports = function(method, postdata, callback) {
+exports = module.exports = function(method, postdata, callback, next) {
     postdata = postdata || {};
     //参数加密处理
     postdata.apiVersion = "1.0.0.0";
@@ -16,14 +16,16 @@ exports = module.exports = function(method, postdata, callback) {
     var $start = new Date();
     request.post(
         {
-            url:'http://api.1caifu.com/api/'+method,
-            //url:'http://192.168.2.199:9000/api/'+method,
+            //url:'http://api.1caifu.com/api/'+method,
+            url:'http://192.168.2.199:9000/api/'+method,
+            //url:'http://localhost:9000/api/'+method,
             json:postdata,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent':'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)'
             },
-            encoding:'utf8'
+            encoding:'utf8',
+            timeout: 10000
         },
         function(error, response, body){
             /*if(response.statusCode == 200){
@@ -34,8 +36,16 @@ exports = module.exports = function(method, postdata, callback) {
                 $return = "";
             }*/
             //console.log(body);
-            console.log("API /"+method+" "+(new Date().getTime()-$start.getTime())+"ms");
-            callback(response.statusCode, body);
+            if(error){
+                console.log(error);
+                if(next)
+                    next(error);
+                else
+                    callback(500, error);
+            }else {
+                console.log("API /" + method + " " + (new Date().getTime() - $start.getTime()) + "ms");
+                callback(response.statusCode, body);
+            }
         }
     );
 }

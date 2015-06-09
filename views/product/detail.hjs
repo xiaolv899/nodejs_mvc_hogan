@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset=""/>
-    <title>{{ title }}</title>
+    <title>{{data.sTitle}} - {{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
@@ -12,17 +12,15 @@
     {{#pm}}下午好{{/pm}}
     {{#night}}晚上好{{/night}},
     {{name}}! <a href="/login?action=logout">退出</a></p>
-<div class="list">
-    <div><a href="?page={{prevpage}}">上一页</a> <a href="?page={{nextpage}}">下一页</a> </div>
-    {{#list}}
+<div class="detail">
+    {{#data}}
     <div>
-        <h3><a href="/product/detail/{{id}}">{{sTitle}}</a></h3>
+        <h3>{{sTitle}}</h3>
         <em>￥{{zdPrice2}}</em>
         <p><img src="http://img.1caifu.com/{{productOrganizationPic}}" /></p>
         <p>{{jingDu}}</p>
     </div>
-    {{/list}}
-    <div><a href="?page={{prevpage}}">上一页</a> <a href="?page={{nextpage}}">下一页</a> </div>
+    {{/data}}
 </div>
 </body>
 </html>
