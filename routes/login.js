@@ -8,7 +8,7 @@ var auth = require('web-auth');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.route('/').get(function(req, res, next) {
     if(req.query.action == "logout"){
         //清除cookie
         //res.clearCookie('username');
@@ -17,8 +17,7 @@ router.get('/', function(req, res, next) {
     }else {
         next();
     }
-});
-router.post('/', function(req, res, next) {
+}).post(function(req, res, next) {
     var postdata = {userName:req.body.name.trim(),passWord:md5(req.body.password)};
     if(postdata.userName==""||req.body.password==""){
         res.render('login', {title: "Express", required:true });

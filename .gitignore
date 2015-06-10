@@ -2,7 +2,9 @@
 node_modules/node-session/
 node_modules/request/
 node_modules/file-stream-rotator/
+node_modules/mssql/
+node_modules/.bin/
 !node_modules/web-auth/*
 log/
 sessions/
-.idea/workspace.xml
+.idea/

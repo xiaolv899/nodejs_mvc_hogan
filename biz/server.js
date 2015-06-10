@@ -13,6 +13,13 @@ exports = module.exports = function(method, postdata, callback, next) {
     postdata.channel = 4;
     postdata.version = "1.0.0.0";
 
+    if(method=="Product/ProductGetList") {
+        db(function (data) {
+            var json = {data:[]};
+            callback(200, json);
+        });
+        return;
+    }
     var $start = new Date();
     request.post(
         {

@@ -12,7 +12,7 @@ var fs = require('fs');
 var NodeSession = require('node-session');
 var session = new NodeSession({
   secret: 'Q3UBzdH9GEfiRCTKbi5MTPyChpzXL7TD',
-  'lifetime': 60000, // 5 minutes(300000)
+  'lifetime': 300000, // 5 minutes(300000)
   'expireOnClose': true,
 });
 //var stream = fs.createWriteStream('./log.txt');
@@ -22,7 +22,7 @@ fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 var userLogStream = FileStreamRotator.getStream({
   filename: logDirectory + '/access-%DATE%.log',
   frequency: 'daily',//写文件频率 1m 1分钟
-  verbose: true,
+  verbose: false,
   date_format: "YYYY-MM-DD"
 });
 
@@ -93,3 +93,6 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+var p = "1";
+console.log(typeof p);
