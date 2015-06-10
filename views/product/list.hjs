@@ -6,12 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>{{ title }}</h1>
-<p>Hello
-    {{#am}}早上好{{/am}}
-    {{#pm}}下午好{{/pm}}
-    {{#night}}晚上好{{/night}},
-    {{name}}! <a href="/login?action=logout">退出</a></p>
+{{>head}}
 <div class="list">
     <div><a href="?page={{prevpage}}">上一页</a> <a href="?page={{nextpage}}">下一页</a> </div>
     {{#list}}

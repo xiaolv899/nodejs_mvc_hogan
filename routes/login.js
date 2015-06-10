@@ -4,13 +4,15 @@
 var express = require('express');
 var api = require('../biz/server');
 var md5 = require('../biz/md5');
+var auth = require('web-auth');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     if(req.query.action == "logout"){
         //清除cookie
-        res.clearCookie('username');
+        //res.clearCookie('username');
+        req.session.flush();
         res.redirect("/");
     }else {
         next();
@@ -24,8 +26,12 @@ router.post('/', function(req, res, next) {
         api("user/login", postdata, function (status, json) {
             if (json.isSuccess) {
                 //记录cookie
-                res.cookie('username', postdata.userName, {maxAge: 600000});
+                //res.cookie('username', postdata.userName, {maxAge: 600000});
+                req.session.put(__appSessionKey,postdata.userName);
                 res.redirect('/product/list');
+                /*auth.add(req, res,postdata.userName,function(){
+                    res.redirect('/product/list');
+                });*/
                 //res.send("login in"+req.cookies.username);
             } else {
                 res.render('login', {title: "Express", errmsg: json.errMsg});

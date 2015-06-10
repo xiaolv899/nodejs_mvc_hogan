@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+{{#name}}
+<p>Hello
+    {{#am}}早上好{{/am}}
+    {{#pm}}下午好{{/pm}}
+    {{#night}}晚上好{{/night}},
+    {{name}}! <a href="/login?action=logout">退出</a></p>
+{{/name}}
+{{^name}}
+<p>Welcome to {{ title }}</p>
+{{/name}}

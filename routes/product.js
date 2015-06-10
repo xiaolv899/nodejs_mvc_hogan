@@ -14,8 +14,9 @@ router.get('/list', function(req, res, next) {
         var $prevpage = postdata.pageIndex - 1, $nextpage = postdata.pageIndex + 1;
         if ($prevpage < 1)$prevpage = 1;
         res.render('product/list', {
+            partials: {head:"head"},
             title: "Express",
-            name: req.cookies.username,
+            name: req.session.get("username"),
             am: ($hour >= 6 && $hour < 12),
             pm: ($hour >= 12 && $hour < 18),
             night: ($hour >= 18 || $hour < 6),
@@ -36,7 +37,7 @@ router.get('/detail/:id', function(req, res, next) {
     api("Product/ProductGet",postdata, function(status, json){
         res.render('product/detail', {
             title: "Express",
-            name: req.cookies.username,
+            name: req.session.get("username"),
             data:json.data
         });
     });

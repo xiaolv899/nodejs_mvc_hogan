@@ -6,8 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+  {{>head}}
     <div class="login">
     <form method="post" action="login">
     <p>登录账号：<input type="text" name="name" ></p>
